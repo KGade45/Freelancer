@@ -5,7 +5,7 @@ import { Navbar } from "flowbite-react";
 import {useState} from 'react'
 
 function SignUpClient() {
-  const [client,setClient] = useState({
+  const [user,setUser] = useState({
     name: "",
     email: "",
     password: "",

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // schema design 
-const userSchema = new mongoose.Schema({
+const jobSchema = new mongoose.Schema({
     clientId:{
         type: mongoose.Schema.Types.ObjectId,
         required:[true,"Id is must"]
@@ -32,5 +32,5 @@ const userSchema = new mongoose.Schema({
 )
 
 
-const userModel = mongoose.model('job', userSchema);
-module.exports =  userModel;
+const jobModel = mongoose.model('job', jobSchema);
+module.exports =  jobModel;
