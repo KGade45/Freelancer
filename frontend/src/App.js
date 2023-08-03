@@ -24,6 +24,7 @@ function App() {
         <Route path="/freelancerHomePage" element={<FreelancerHomePage />} />
         <Route path="/signuptofindWork" element={<SignuptofindWork />} />
         <Route path="/chat" element={<Chat />} />
+        {/* <Route path="/" */}
         <Route />
       </Routes>
     </div>
