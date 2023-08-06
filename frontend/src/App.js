@@ -1,13 +1,14 @@
 import "./App.css";
-import Home from "./pages/Home";
+import Home from "./Pages/Home";
 import { Route, Routes } from "react-router-dom";
-import JoinAsClintOrFreelancer from "./pages/JoinAsClintOrFreelancer";
-import Login from "./pages/Login";
-import SignUpFreelancer from "./pages/SignUpFreelancer";
-import FreelancerHomePage from "./pages/FreelancerHomePage";
-import SignUpClient from "./pages/SignUpClient";
-import SignuptofindWork from "./pages/ SignuptofindWork";
-import Chat from "./pages/Chat";
+import JoinAsClintOrFreelancer from "./Pages/JoinAsClintOrFreelancer.jsx";
+import Login from "./Pages/Login.jsx";
+import SignUpFreelancer from "./Pages/SignUpFreelancer.jsx";
+import FreelancerHomePage from "./Pages/FreelancerHomePage.jsx";
+import SignUpClient from "./Pages/SignUpClient.jsx";
+import SignuptofindWork from "./Pages/SignuptofindWork.jsx";
+import Chat from "./Pages/Chat";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/freelancerHomePage" element={<FreelancerHomePage />} />
         <Route path="/signuptofindWork" element={<SignuptofindWork />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route />
       </Routes>
     </div>
