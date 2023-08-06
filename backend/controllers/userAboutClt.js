@@ -11,8 +11,33 @@ const edituser = async(req,res)=>{
     }
 } 
 
+const register = async(req, res)=>{
+    try{
+    const userId = req.body.userId;
+    const {domain, skills, education, experience, portFolio, charges } = req.body;
+    const newUser = new userModel({
+        userId,
+        domain,
+        skills,
+        education,
+        experience,
+        portFolio,
+        charges
+      })
+      res.status(201).json({
+        success: true,
+        newUser
+      });
+    }
+    catch(error){
+        res.status(400).json({
+            success: false,
+            error
+        })
+    }
+}
 
-module.exports = edituser;
+module.exports = {edituser, register};
 
 
 
