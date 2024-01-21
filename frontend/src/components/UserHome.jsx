@@ -1,35 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import JobCard from './JobCard';
 import axios from 'axios';
-
+import JobCard from './JobCard';
 
 function UserHome() {
-    const jobInfo = {
-        title: 'Web Developer',
-        skills: ['React', 'Node.js', 'CSS'],
-        duration: '3 months',
-        price: 5000,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...',
-    };
-
+    const [searchQuery, setSearchQuery] = useState('');
     const [jobs, setJobs] = useState([]);
 
 
+    const fetchJobs = async () => {
+        try {
+            const res = await axios.get('/users/getalljobs');
+            setJobs(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleSearch = async () => {
+        try {
+            const response = await axios.post('/api/v1/users/search', {
+                title: searchQuery,
+            });
+            setJobs(response.data || []);
+        } catch (error) {
+            console.error('Error searching jobs:', error);
+        }
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     useEffect(() => {
-
-
-        const getAllJobs = async () => {
-            try {
-                const res = await axios.get("/users/getalljobs")
-                setJobs(res.data)
-            } catch (error) {
-                console.error(error);
-            }
+        // Fetch all jobs initially
+        if (searchQuery === '') {
+            fetchJobs();
         }
 
-        getAllJobs();
-    }, [])
-
+    }, [searchQuery]);
 
     return (
         <div className="absolute left-0 w-3/4 top-0 h-full p-20 mx-5 mb-5">
@@ -44,6 +54,9 @@ function UserHome() {
                     type="text"
                     placeholder="Search..."
                     className="w-full p-2 border border-gray-300 rounded-full"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
             </div>
 

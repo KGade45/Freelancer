@@ -1,4 +1,4 @@
-import aboutModel from "../models/fAboutModel";
+const aboutModel = require( "../models/fAboutModel");
 
 
 const edituser = async (req, res) => {
@@ -37,7 +37,7 @@ const register = async (req, res) => {
     }
 }
 
-export default { edituser, register };
+module.exports =  { edituser, register };
 
 
 

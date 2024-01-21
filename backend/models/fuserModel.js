@@ -1,7 +1,9 @@
-import { Schema, model } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
+
 
 // schema design 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     name:{
         type: String, 
         require:[true, "name is required"]
@@ -14,7 +16,7 @@ const userSchema = new Schema({
     password:{
         type: String, 
         require:[true, "password is required"]
-    },
+    }, 
     about: {
         type: Schema.Types.ObjectId,
         ref: 'freelancerAbout', // Reference to the freelancerAbout model
@@ -24,5 +26,5 @@ const userSchema = new Schema({
 )
 
 
-const userModel = model('freelancer', userSchema);
-export default  userModel;
+const userModel = mongoose.model('freelancer', userSchema);
+module.exports =  userModel;

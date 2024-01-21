@@ -72,18 +72,18 @@ const fregisterController = async (req, res) => {
 
 const search = async (req, res) => {
   try {
-    const query = req.body.query; // The attribute being searched, passed as a URL parameter
+    const query = req.body.title; // The attribute being searched, passed as a URL parameter
 
     // Perform a case-insensitive search using regular expressions
-    const results = await jobModel.find({ title: { $regex: query, $options: 'i' } });
+    const results = await jobModel.find({ title: { $regex: new RegExp(query, 'i') } });
     console.log(results);
     res.status(200).json(results); // Return the search results to the client
-    // results[0].description     if we are getting multiple results we can access them using thier index.
   } catch (error) {
     console.error('Error in searchAttribute controller:', error);
     res.status(500).json({ error });
   }
-}
+};
+
 
 
 const applyForJob = async (req, res) => {
@@ -145,7 +145,7 @@ const getAllJobs = async(req, res)=>{
     res.json(allRecords);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Not found' });
   }
 }
 

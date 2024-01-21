@@ -1,10 +1,10 @@
-import { Router } from "express";
-import { fregisterController, search, applyForJob, getInfo, getAllJobs } from "../controllers/fuserController";
-import { register } from "../controllers/userAboutClt";
+const express = require("express");
+const { fregisterController,search, applyForJob, getAllJobs } = require("../controllers/fuserController");
+const { register } = require("../controllers/userAboutClt");
 
 // router Object
 
-const router = Router();
+const router = express.Router();
 
 // routers
 // POST || LOGIN
@@ -23,10 +23,10 @@ router.post('/search', search);
 router.post("/apply",applyForJob);
 
 //GET || INFO
-router.post("/getInfo", getInfo);
+router.get("/getInfo",applyForJob);
 
 //GET || INFO
-router.post("/getalljobs", getAllJobs);
+router.get("/getalljobs", getAllJobs);
 
 
-export default router;
+module.exports = router;
