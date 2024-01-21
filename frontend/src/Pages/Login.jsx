@@ -1,9 +1,8 @@
 ("use client");
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { Navbar } from "flowbite-react";
-import { useState,useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate  } from 'react-router-dom'
 import axios from 'axios'
 
 function Login() {
@@ -11,23 +10,37 @@ function Login() {
     email: "",
     password: ""
   })
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user)
-    try{
-      const data = await axios.post('/login',user)
-      console.log(data.data.role)
-    }catch(error){
-      console.log(error)
+    console.log(user);
+    try {
+      const { data } = await axios.post('/login', user);
+      console.log(data.data.role);
+
+      let role = "unknown";
+      // Determine the role and navigate accordingly
+      if (data.data.role === 'client') {
+        navigate('/Dashboard'); 
+        role = "client";
+      } else if (data.data.role === 'freelancer') {
+        navigate('/FreelancerHomePage');
+        role = "freelancer"; 
+      }
+
+      localStorage.setItem('user', JSON.stringify({ ...data.user, password: '', role }));
+    } catch (error) {
+      console.log(error);
     }
-  }
-  
-  
+  };
+
+
+
 
   return (
     <>
-    
+
       <div className="min-h-screen bg-gray-50 flex flex-col  py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full  sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -37,7 +50,7 @@ function Login() {
 
         <div className="mt-8 sm:mx-auto sm:w-full m-4 sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" onSubmit={(e)=>{
+            <form className="space-y-6" onSubmit={(e) => {
               e.preventDefault();
               handleSubmit(e);
             }}>
@@ -55,7 +68,7 @@ function Login() {
                     type="email"
                     autoComplete="email"
                     onChange={(e) => {
-                      setUser({ ...user, email:e.target.value })
+                      setUser({ ...user, email: e.target.value })
                     }}
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -77,7 +90,7 @@ function Login() {
                     type="password"
                     autoComplete="current-password"
                     onChange={(e) => {
-                      setUser({ ...user,password : e.target.value })
+                      setUser({ ...user, password: e.target.value })
                     }}
                     required
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"

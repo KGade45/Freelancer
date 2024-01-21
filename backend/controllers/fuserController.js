@@ -1,4 +1,4 @@
-const userModel = require("../models/fuserModel");
+const userModel = require("../models/fuserModel").default;
 const jobModel = require("../models/jobModule");
 const applicationModel = require("../models/applicationModel")
 const bcrypt = require('bcrypt');
@@ -120,5 +120,34 @@ const applyForJob = async (req, res) => {
   }
 };
 
+const getInfo = async (req, res) => {
+  try {
+    const userId = req.body.userid; // Assuming the user ID is sent in the request body
 
-module.exports = { fregisterController, search, applyForJob }
+    const userInfo = await userModel
+      .findById(userId)
+      .populate({
+        path: 'about', // Populate the 'about' field, which is a reference to the freelancerAbout model
+        select: 'domain skills', // Select the fields you want to retrieve
+      })
+      .select('name'); // Select the 'name' field from the userModel
+
+    res.status(201).json(userInfo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+const getAllJobs = async(req, res)=>{
+  try {
+    const allRecords = await jobModel.find();
+    res.json(allRecords);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+
+module.exports = { fregisterController, search, applyForJob, getInfo, getAllJobs }
