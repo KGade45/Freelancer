@@ -1,5 +1,5 @@
 const express = require("express");
-const { fregisterController,search, applyForJob, getAllJobs } = require("../controllers/fuserController");
+const { fregisterController,search, applyForJob, getAllJobs, getInfo } = require("../controllers/fuserController");
 const { register } = require("../controllers/userAboutClt");
 
 // router Object
@@ -23,7 +23,7 @@ router.post('/search', search);
 router.post("/apply",applyForJob);
 
 //GET || INFO
-router.get("/getInfo",applyForJob);
+router.get("/getInfo",getInfo);
 
 //GET || INFO
 router.get("/getalljobs", getAllJobs);

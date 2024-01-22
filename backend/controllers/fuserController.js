@@ -1,4 +1,4 @@
-const userModel = require("../models/fuserModel").default;
+const userModel = require("../models/fuserModel");
 const jobModel = require("../models/jobModule");
 const applicationModel = require("../models/applicationModel")
 const bcrypt = require('bcrypt');
@@ -30,43 +30,46 @@ const bcrypt = require('bcrypt');
 // Register USer
 const fregisterController = async (req, res) => {
   try {
-    // const newUser = new userModel(req.body);
-    // await newUser.save();
+    console.log("controller ",req.body);
     const { name, email, password } = req.body;
-    // Check if the email already exists in the database
     const existingUser = await userModel.findOne({ email });
+
     if (existingUser) {
-      // If the email already exists, return an error response
       return res.status(409).json({
         success: false,
         error: "Email already exists",
       });
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(name, email, hashedPassword);
-    // const user = await userModel.create({
-    //   name,
-    //   email,
-    //   password: hashedPassword
-    // });
     const newUser = new userModel({
       name,
       email,
       password: hashedPassword
-    })
-    delete (await newUser).password
+    });
+
+    // Avoid logging sensitive information in production
+    console.log("New user registered:", { name, email });
+
+    // Create a user object without the password field
+    const userWithoutPassword = newUser.toObject();
+    delete userWithoutPassword.password;
+
     res.status(201).json({
       success: true,
-      newUser
+      newUser: userWithoutPassword,
+      userid: newUser._id
     });
 
   } catch (error) {
-    res.status(400).json({
+    console.log(error.message);
+    res.status(500).json({
       success: false,
-      error
-    })
+      error: "Internal server error"
+    });
   }
-}
+};
+
 
 
 
