@@ -5,10 +5,11 @@ const bcrypt = require('bcrypt')
 const loginController = async (req, res) => {
 
   try {
+    // console.log(req.body);
     const { email, password } =  req.body;
     let user;
-    console.log(email)
-    console.log(password)
+    // console.log(email)
+    // console.log(password)
 
     // Search for the user in the clientModel collection
     user = await clientModel.findOne({ email });
