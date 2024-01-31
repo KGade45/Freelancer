@@ -1,8 +1,8 @@
 import React from "react";
 // import { useState, useEffect } from "react"
 // import axios from 'axios';
-import UserInfo from "../../components/UserInfo";
-import UserHome from "../../components/UserHome";
+import UserInfo from "../../components/freelancer/UserInfo";
+import UserHome from "../../components/freelancer/UserHome";
 
 const FreelancerHomePage = () => {
   return (

@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const jobSchema = new mongoose.Schema({
     clientId:{
         type: mongoose.Schema.Types.ObjectId,
-        required:[true,"Id is must"]
+        required:[true,"Id is must"],
+        ref: 'hiringClients'
     },
     title:{
         type: String, 
@@ -13,7 +14,6 @@ const jobSchema = new mongoose.Schema({
     skills:{
         type: [String], 
         require:[true, "skills are required"],
-        unique: true
     },
     duration:{
         type: String, 

@@ -10,7 +10,7 @@ import Chat from "./pages/Chat.jsx";
 import { useDispatch } from "react-redux";
 import SignuptofindWork from "./pages/freelancer/SignuptofindWork.jsx";
 import { login, logout } from "./store/authSlice"
-// import Dashboard from "./pages/Dashboard.jsx";
+// import Dashboard from "./pages/client/Dashboard.jsx";
 
 function App() {
   
@@ -34,6 +34,7 @@ function App() {
           element={<JoinAsClintOrFreelancer />}
         />
         <Route path="/login" element={<Login />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/signUpFreelancer" element={<SignUpFreelancer />} />
         <Route path="/signUpClient" element={<SignUpClient />} />
         <Route path="/freelancerHomePage" element={<FreelancerHomePage />} />

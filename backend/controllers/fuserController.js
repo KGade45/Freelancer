@@ -3,30 +3,6 @@ const jobModel = require("../models/jobModule");
 const applicationModel = require("../models/applicationModel")
 const bcrypt = require('bcrypt');
 
-// const floginController = async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-//         const user = await userModel.findOne({ email, password });
-
-//         if (!user) {
-//             res.status(404).send(`User not found`)
-//         }
-//         res.status(200).json({
-//             success: true,
-//             // user
-//         });
-
-
-//     } catch (error) {
-//         res.status(400).json({
-//             success: false,
-//             error
-//         })
-//     }
-// }
-
-
-
 // Register USer
 const fregisterController = async (req, res) => {
   try {
@@ -125,7 +101,7 @@ const applyForJob = async (req, res) => {
 
 const getInfo = async (req, res) => {
   try {
-    const userId = req.body.userid; // Assuming the user ID is sent in the request body
+    const userId = req.body.userid;
 
     const userInfo = await userModel
       .findById(userId)

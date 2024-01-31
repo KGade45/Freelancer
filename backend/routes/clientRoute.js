@@ -1,5 +1,5 @@
 const express = require("express");
-const { cregisterController,postJob, drafts, getApplicantsForJob } = require("../controllers/clientController");
+const { cregisterController,postJob, drafts, getApplicantsForJob, getAllFreelancers, getInfo } = require("../controllers/clientController");
 
 // router Object
 
@@ -20,5 +20,12 @@ router.post('/clientHome',drafts);
 
 //GET || APPLICANTS
 router.get('/applicants', getApplicantsForJob)
+
+//GET || INFO
+router.get("/getallfreelancers", getAllFreelancers);
+
+//GET || INFO
+router.get("/getInfo", getInfo);
+
 
 module.exports = router;

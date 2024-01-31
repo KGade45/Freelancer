@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import JobCard from './JobCard';
+import JobCard from '../JobCard';
 
 function UserHome() {
     const [searchQuery, setSearchQuery] = useState('');

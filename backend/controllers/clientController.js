@@ -2,6 +2,7 @@ const clientModel = require("../models/clientModel");
 const jobModel = require("../models/jobModule");
 const Application = require('../models/applicationModel');
 const About = require('../models/fAboutModel');
+const freelancer = require('../models/fuserModel');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose')
 
@@ -149,6 +150,38 @@ const getApplicantsForJob = async (req, res) => {
 };
 
 
+const getAllFreelancers = async(req, res)=>{
+    try {
+        const allfreelancers = await freelancer.find()
+        .populate({
+            path: "about",
+            select: "domain skills charges experience"
+        })
+        .select("name");
+        res.json(allfreelancers);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+const getInfo = async (req, res) => {
+    try {
+        const clientId = req.body.userid;
+
+        // Use populate to get the associated jobs
+        const userInfo = await clientModel
+            .findById(clientId)
+            .populate('jobs')  // Assuming you have a 'jobs' field in the clientModel referencing jobs
+            .select("name company");
+
+        res.status(200).json(userInfo);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 
-module.exports = { cregisterController, editInfo, postJob, drafts, getApplicantsForJob }
+
+
+module.exports = { cregisterController, editInfo, postJob, drafts, getApplicantsForJob, getAllFreelancers, getInfo }

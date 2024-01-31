@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     }, 
     about: {
         type: Schema.Types.ObjectId,
-        ref: 'freelancerAbout', // Reference to the freelancerAbout model
+        ref: 'fAboutModel', // Reference to the freelancerAbout model
     },
 },
 {timestamps:true}

@@ -1,10 +1,15 @@
 ("use client");
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { Navbar } from "flowbite-react";
-import {useState} from 'react'
+import axios from "axios";
+import {useNavigate, Link} from "react-router-dom"
+
 
 function SignUpClient() {
+
+  const navigate = useNavigate()
+
   const [user,setUser] = useState({
     name: "",
     email: "",
@@ -12,6 +17,31 @@ function SignUpClient() {
     company: "",
     contactNumber:"",
   })
+
+  const handleChange = (e)=>{
+    const {name, value} = e.target;
+    setUser((prev)=>({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("Form Data: ", user);
+      const res = await axios.post('/client/register', user);
+
+      navigate(`/dashboard`);
+    } catch (error) {
+      console.error("Request failed:", error.message);
+      console.error("Server response:", error.response.data);
+    }
+  };
+
+
+
   return (
     <>
       <Navbar fluid rounded className=" bg-slate-50">
@@ -22,11 +52,7 @@ function SignUpClient() {
           <div className="flex md:order-2 mr-8">
             <Navbar.Toggle />
           </div>
-          <Navbar.Collapse>
-            <Navbar.Link href="#" className="mx-4 mt-2  md:mx-0">
-              Login
-            </Navbar.Link>
-          </Navbar.Collapse>
+          
         </div>
       </Navbar>
 
@@ -165,6 +191,26 @@ function SignUpClient() {
                   </button>
                 </div>
               </form>
+
+              <div className="mt-6">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-2 bg-white text-gray-500">
+                      Don't have an FMP account?
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <Link to="/login">
+                  <button className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-400 hover:bg-green-700 focus:outline-none focus:ring-2 mt-4 focus:ring-offset-2 focus:ring-green-500">
+                    Login
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
