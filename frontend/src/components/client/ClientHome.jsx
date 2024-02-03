@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Freelancer from './FreelancerCard';
+import FreelancerCard from './FreelancerCard';
 
 function UserHome() {
-    const [searchQuery, setSearchQuery] = useState('');
     const [freelancers, setFreelancers] = useState([]);
-
 
     const fetchFreelancers = async () => {
         try {
             const res = await axios.get('/client/getallfreelancers');
             setFreelancers(res.data);
+            
         } catch (error) {
             console.error(error);
         }
@@ -34,10 +33,10 @@ function UserHome() {
 
             {/* Posted Jobs */}
             <div className="text-sm text-left">
-                <h2 className="text-xl mb-2 font-medium">Jobs recommended for you</h2>
-                <div className="flex justify-center">
+                <h2 className="text-xl mb-2 font-medium">Freelancers around the globe</h2>
+                <div className="flex flex-col items-center" >
                     {freelancers.map((freelancer) => (
-                        <FreelancerCard key={job._id} job={job} />
+                        <FreelancerCard key={freelancer._id} freelancer={freelancer} />
                     ))}
                 </div>
             </div>

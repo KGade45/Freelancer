@@ -155,12 +155,12 @@ const getAllFreelancers = async(req, res)=>{
         const allfreelancers = await freelancer.find()
         .populate({
             path: "about",
-            select: "domain skills charges experience"
+            select: "domain skills charges experience education"
         })
         .select("name");
         res.json(allfreelancers);
     } catch (error) {
-        console.error(error);
+        console.error("this", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 }

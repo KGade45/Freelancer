@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import JoinAsClintOrFreelancer from "./pages/JoinAsClintOrFreelancer.jsx";
@@ -10,12 +10,13 @@ import Chat from "./pages/Chat.jsx";
 import { useDispatch } from "react-redux";
 import SignuptofindWork from "./pages/freelancer/SignuptofindWork.jsx";
 import { login, logout } from "./store/authSlice"
-// import Dashboard from "./pages/client/Dashboard.jsx";
+import Dashboard from "./pages/client/Dashboard.jsx";
+import ProfileFreelancer from "./components/client/ProfileFreelacer.jsx";
 
 function App() {
-  
+
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
@@ -24,7 +25,7 @@ function App() {
       dispatch(logout());
     }
   }, []);
-  
+
   return (
     <div className="App">
       <Routes>
@@ -34,7 +35,8 @@ function App() {
           element={<JoinAsClintOrFreelancer />}
         />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+        <Route path="/freelancer/:id" element={<ProfileFreelancer />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/signUpFreelancer" element={<SignUpFreelancer />} />
         <Route path="/signUpClient" element={<SignUpClient />} />
         <Route path="/freelancerHomePage" element={<FreelancerHomePage />} />

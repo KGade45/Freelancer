@@ -1,8 +1,12 @@
 import React from 'react'
-
+import ClientHome from '../../components/client/ClientHome'
+import CompInfo from '../../components/client/CompInfo'
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div><div >
+      <ClientHome/>
+      <CompInfo/>
+    </div></div>
   )
 }
 
