@@ -22,8 +22,8 @@ router.post('/search', search);
 //POST || APPLY
 router.post("/apply",applyForJob);
 
-//GET || INFO
-router.get("/getInfo",getInfo);
+//POST || INFO
+router.post("/getinfo",getInfo);
 
 //GET || INFO
 router.get("/getalljobs", getAllJobs);

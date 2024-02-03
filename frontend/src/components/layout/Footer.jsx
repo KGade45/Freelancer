@@ -6,7 +6,7 @@ function Footer() {
       <div className="py-10 px-5 flex justify-center border-b border-gray-900">
         <h2 className="text-white text-lg font-medium">Follow us:</h2>
         <div className="ml-4 flex space-x-4">
-          <a href="linkedin.com/in/kaustubh-gade-04353421a/" className="text-white">
+          <a href="//linkedin.com/in/kaustubh-gade-04353421a/" className="text-white">
             <i className="fab fa-linkedin"></i>
           </a>
           <a href="#" className="text-white">

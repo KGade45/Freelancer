@@ -17,8 +17,8 @@ function Login() {
     e.preventDefault();
     console.log(user);
     try {
-      const { data } = await axios.post('/login', user);
-      console.log(data.data.role);
+      const data  = await axios.post('/login', user);
+      console.log(data);
 
       let role = "unknown";
       // Determine the role and navigate accordingly
@@ -29,8 +29,10 @@ function Login() {
         navigate('/FreelancerHomePage');
         role = "freelancer"; 
       }
+      const { _id } = data.data.user; 
+      console.log(_id);
+      localStorage.setItem('user', JSON.stringify({ _id, password: '', role }));
 
-      localStorage.setItem('user', JSON.stringify({ ...data.user, password: '', role }));
       dispatch(login(data));
     } catch (error) {
       console.log(error);

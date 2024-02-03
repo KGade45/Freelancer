@@ -6,23 +6,29 @@ function UserInfo() {
     const [domain, setDomain] = useState("");
     const [userName, setUserName] = useState("");
 
-    useEffect(() => {
-        const getInfo = async () => {
-            const user = JSON.parse(localStorage.getItem('user'));
-            try {
-                const res = await axios.get("/users/getInfo", {
-                    data: { userid: user._id }
-                });
 
-                setUserName(res.data.name);
-                setDomain(res.data.domain);
-                setSkills((prev) => [...prev, ...res.data.skills]);
+    const getInfo = async () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        // console.log("local user", user);
+        try {
+            const res = await axios.post("/users/getinfo", {
+                userId: user._id
+            });
 
-            } catch (error) {
-                console.error("Error fetching user info:", error);
-            }
+            console.log("This is response", res);
 
+            setUserName(res.data.name);
+            setDomain(res.data.domain);
+            setSkills([...res.data.about.skills]);
+
+        } catch (error) {
+            console.error("Error fetching user info:", error);
         }
+
+    }
+
+    useEffect(() => {
+        
 
         getInfo();
 

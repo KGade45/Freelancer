@@ -101,16 +101,25 @@ const applyForJob = async (req, res) => {
 
 const getInfo = async (req, res) => {
   try {
-    const userId = req.body.userid;
+    const {userId} = req.body;
 
+    console.log("userId is", userId);
     const userInfo = await userModel
       .findById(userId)
       .populate({
-        path: 'about', // Populate the 'about' field, which is a reference to the freelancerAbout model
-        select: 'domain skills', // Select the fields you want to retrieve
+        path: 'about', 
+        select: 'domain skills', 
       })
-      .select('name'); // Select the 'name' field from the userModel
+      .select('name'); 
 
+
+    // const allfreelancers = await freelancer.find()
+    //   .populate({
+    //     path: "about",
+    //     select: "domain skills charges experience education"
+    //   })
+    //   .select("name");
+    
     res.status(201).json(userInfo);
   } catch (error) {
     console.error(error);
